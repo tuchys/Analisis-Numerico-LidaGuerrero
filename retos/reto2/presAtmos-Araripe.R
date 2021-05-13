@@ -1,16 +1,16 @@
 library (pracma)
 library(readxl)
-#Se buscan los datos de la base de Quixeramobim por lo cual la base más cercana es la de Quixada 
+#datos de Araripe
 araripe <- read_excel("Abril 2013 (1 em 1 hora) (2).xls", sheet = "Araripe")
 araripeOriginal <- read_excel("Abril 2013 (1 em 1 hora) (2).xls", sheet = "Araripe")
-datosOriginales = araripeOriginal$`Pressão Atmosférica(hPa)`
-datosTemp = araripe$`Pressão Atmosférica(hPa)`
+datosOriginales = araripeOriginal$`PressÃ£o AtmosfÃ©rica(hPa)`
+datosTemp = araripe$`PressÃ£o AtmosfÃ©rica(hPa)`
 tam = length(datosTemp)
 porcentaje = length(datosTemp)*0.8
 toma = sort(sample(1:length(datosTemp),porcentaje, replace = F))
 plot(1:tam, datosOriginales , type="l",xlab = "numeracion de dias",ylab = "Presion atmosferica relativa",main = "Presion atmosferica original")
 datosTemp = datosTemp[toma]
-#Se saca la interpolación de la muestra de Quixada y se aplica spline 
+#interpolaciÃ³n de spline 
 inter = spline(toma,datosTemp,n=length(datosOriginales))
 length(inter$y)
 plot(1:length(datosOriginales),datosOriginales,type = "l",xlab = "numeracion de dias",ylab = "Presion atmosferica relativa",main = "Presion atmosferica Spline")
